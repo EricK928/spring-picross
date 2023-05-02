@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Game Status</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1><p th:text="'Your puzzle code is: ' + ${finishedPuzzle.getId()}" /></h1>
+    <a href="/createPuzzle">Make another puzzle</a>
+    <br>
+        <a href="/picrossCode">Play (Code)</a>
+    <br>
+        <a href="/picrossRandom">Play (Random)</a>
+    <br>
+    <a href="/login">Logout</a>
+    <br>
+</body>
+</html>

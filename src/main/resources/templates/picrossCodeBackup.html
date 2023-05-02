@@ -1,0 +1,658 @@
+<html>
+	<head>
+		<title>Eric's Picross Game</title>
+		<style>
+			table, th, td {
+				border: 3px solid black;
+				border-collapse: collapse;
+
+				}
+
+			 .center {
+			   margin-left: auto;
+			   margin-right: auto;
+			}
+    	</style>
+	</head>
+<body oncontextmenu="return false;">
+
+	<p align='center'><input id="tut" type="button" value="How to play" /></p>
+	<p align='center'><input id="hint" type="button" value="Hint"/></p>
+	<p align='center' id="difficulty"></p>
+	<p align='center' id="hints"></p>
+
+<p hidden align='center' id="puzzleName" th:text="${puzzleFound.getPuzzleName()}"></p>
+<p hidden align='center' id="puzzleData" th:text="${puzzleFound.getPuzzleData()}"></p>
+<p hidden align='center' id="puzzleSize" th:text="${puzzleFound.getPuzzleSize()}"></p>
+<p hidden align='center' id="puzzleCode" th:text="${puzzleFound.getId()}"></p>
+
+<form action="#" th:action="@{/picrossCode}" th:object="${picrossCode}" method="post">
+<p align='center'><input type="submit" id="submit" style="display: none"/></p>
+	
+	<p align='center' id="status">Press "New game" to start</p>
+	
+
+	<table id="game" style="width:700px; visibility: hidden" class = "center" value="test">
+		  <tr>
+			<td></td>
+			<th scope="col" id="column1"></th>
+			<th scope="col" id="column2"></th>
+			<th scope="col" id="column3"></th>
+			<th scope="col" id="column4"></th>
+			<th scope="col" id="column5"></th>
+			<th scope="col" id="column6"></th>
+			<th scope="col" id="column7"></th>
+			<th scope="col" id="column8"></th>
+			<th scope="col" id="column9"></th>
+			<th scope="col" id="column10"></th>
+		  </tr>
+		  <tr id="r1">
+			<th scope="row" id="row1"></th>
+			<td id="row1column1"><input id="r1c1" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row1column2"><input id="r1c2" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row1column3"><input id="r1c3" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row1column4"><input id="r1c4" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row1column5"><input id="r1c5" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row1column6"><input id="r1c6" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row1column7"><input id="r1c7" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row1column8"><input id="r1c8" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row1column9"><input id="r1c9" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row1column10"><input id="r1c10" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+		  </tr>
+		  <tr id="r2">
+			<th scope="row" id="row2"></th>
+			<td id="row2column1"><input id="r2c1" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row2column2"><input id="r2c2" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row2column3"><input id="r2c3" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row2column4"><input id="r2c4" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row2column5"><input id="r2c5" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row2column6"><input id="r2c6" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row2column7"><input id="r2c7" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row2column8"><input id="r2c8" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row2column9"><input id="r2c9" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row2column10"><input id="r2c10" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+		  </tr>
+		  <tr id="r3">
+		  	<th scope="row" id="row3"></th>
+			<td id="row3column1"><input id="r3c1" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row3column2"><input id="r3c2" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row3column3"><input id="r3c3" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row3column4"><input id="r3c4" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row3column5"><input id="r3c5" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row3column6"><input id="r3c6" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row3column7"><input id="r3c7" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row3column8"><input id="r3c8" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row3column9"><input id="r3c9" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row3column10"><input id="r3c10" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+		  </tr>
+		  		  <tr id="r4">
+		  			<th scope="row" id="row4"></th>
+			<td id="row4column1"><input id="r4c1" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row4column2"><input id="r4c2" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row4column3"><input id="r4c3" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row4column4"><input id="r4c4" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row4column5"><input id="r4c5" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row4column6"><input id="r4c6" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row4column7"><input id="r4c7" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row4column8"><input id="r4c8" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row4column9"><input id="r4c9" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row4column10"><input id="r4c10" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+		  </tr>
+		  <tr id="r5">
+		  	<th scope="row" id="row5"></th>
+			<td id="row5column1"><input id="r5c1" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row5column2"><input id="r5c2" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row5column3"><input id="r5c3" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row5column4"><input id="r5c4" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row5column5"><input id="r5c5" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row5column6"><input id="r5c6" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row5column7"><input id="r5c7" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row5column8"><input id="r5c8" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row5column9"><input id="r5c9" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row5column10"><input id="r5c10" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+		  </tr>
+		  		  <tr id="r6">
+		  			<th scope="row" id="row6"></th>
+			<td id="row6column1"><input id="r6c1" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row6column2"><input id="r6c2" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row6column3"><input id="r6c3" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row6column4"><input id="r6c4" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row6column5"><input id="r6c5" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row6column6"><input id="r6c6" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row6column7"><input id="r6c7" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row6column8"><input id="r6c8" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row6column9"><input id="r6c9" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row6column10"><input id="r6c10" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+		  </tr>
+		  		  <tr id="r7">
+		  			<th scope="row" id="row7"></th>
+			<td id="row7column1"><input id="r7c1" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row7column2"><input id="r7c2" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row7column3"><input id="r7c3" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row7column4"><input id="r7c4" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row7column5"><input id="r7c5" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row7column6"><input id="r7c6" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row7column7"><input id="r7c7" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row7column8"><input id="r7c8" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row7column9"><input id="r7c9" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row7column10"><input id="r7c10" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+		  </tr>
+		  		  <tr id="r8">
+		  			<th scope="row" id="row8"></th>
+			<td id="row8column1"><input id="r8c1" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row8column2"><input id="r8c2" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row8column3"><input id="r8c3" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row8column4"><input id="r8c4" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row8column5"><input id="r8c5" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row8column6"><input id="r8c6" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row8column7"><input id="r8c7" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row8column8"><input id="r8c8" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row8column9"><input id="r8c9" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row8column10"><input id="r8c10" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+		  </tr>
+		  		  <tr id="r9">
+		  			<th scope="row" id="row9"></th>
+			<td id="row9column1"><input id="r9c1" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row9column2"><input id="r9c2" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row9column3"><input id="r9c3" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row9column4"><input id="r9c4" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row9column5"><input id="r9c5" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row9column6"><input id="r9c6" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row9column7"><input id="r9c7" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row9column8"><input id="r9c8" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row9column9"><input id="r9c9" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row9column10"><input id="r9c10" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+		  </tr>
+		  		  <tr id="r10">
+		  			<th scope="row" id="row10"></th>
+			<td id="row10column1"><input id="r10c1" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row10column2"><input id="r10c2" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row10column3"><input id="r10c3" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row10column4"><input id="r10c4" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row10column5"><input id="r10c5" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row10column6"><input id="r10c6" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row10column7"><input id="r10c7" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row10column8"><input id="r10c8" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row10column9"><input id="r10c9" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+			<td id="row10column10"><input id="r10c10" type="button" style="background: white; width: 60px; visibility: hidden; font-size:40px" value="" onmousedown="setValue(this.id, event)" /></td>
+		  </tr>
+	</table>
+
+	<script>
+	var winStreak=0;
+	var winCheckFlag=1;
+
+	var hintAmt=0;
+	
+	var gameBoard=[puzzleSize];
+	var playerBoard=[puzzleSize];
+
+	var rowLabels=[puzzleSize];
+	var columnLabels=[puzzleSize];
+	var helpBtn = document.getElementById("tut");
+	var startBtn = document.getElementById("start");
+	var hintBtn = document.getElementById("hint");
+	var gameInProgress=0;
+	
+	var puzzleName = document.getElementById("puzzleName").innerHTML;
+	var puzzleData = document.getElementById("puzzleData").innerHTML;
+	var puzzleSize = document.getElementById("puzzleSize").innerHTML;
+	var puzzleCode = document.getElementById("puzzleCode").innerHTML;
+
+	function fillBoard(boardToFill)
+	{
+		for(var j=0; j<puzzleSize; j++)
+		{
+			boardToFill[j]=new Array(puzzleSize);
+		}
+	}
+
+	function clearHTMLBoard()
+	{
+		for(var i=0; i<puzzleSize; i++)
+		{
+			for(var j=0; j<puzzleSize; j++)
+			{
+				var name="r"+(i+1)+"c"+(j+1);//Used for the grid ID names
+
+				document.getElementById(name).value=""
+				document.getElementById(name).style.background="white";
+			}
+		}
+	}
+
+	function updateGameBoard()
+	{
+		for(var i=0; i<puzzleSize; i++)
+		{
+			for(var j=0; j<puzzleSize; j++)
+			{
+				var name="r"+(i+1)+"c"+(j+1);//Used for the grid ID names
+
+				if(document.getElementById(name).value=="")
+				{
+					playerBoard[i][j]="X";
+				}
+				else
+				{
+					playerBoard[i][j]=document.getElementById(name).value//Gets values in game board
+				}
+
+			}
+		}
+	}
+
+	function checkForWin()
+	{
+		var win=1;
+		for(var i=0; i<puzzleSize; i++)
+		{
+			for(var j=0; j<puzzleSize; j++)
+			{
+				if(gameBoard[i][j]!=playerBoard[i][j])
+				{
+					win=0;
+				}
+			}
+		}
+
+		if(win==1 && winCheckFlag==1)
+		{
+			document.getElementById('hints').value=document.getElementById('hint').value;
+			console.log(document.getElementById('hints').value);
+			document.getElementById('submit').click();
+			//winStreak++;
+			//totalWins++;
+			//document.getElementById("status").innerHTML="YOU WIN!\n Puzzles completed: "+winStreak;
+			gameInProgress=0;
+			winCheckFlag=0;
+		}
+		else
+		{
+		}
+	}
+
+	function createRandomPuzzle()
+	{
+		var locInData=0;
+		var fillCount=0;
+
+		for(var i=0; i<puzzleSize; i++)
+		{
+			for(var j=0; j<puzzleSize; j++)
+			{
+				var currentPiece=puzzleData[locInData];
+				gameBoard[i][j]=currentPiece;
+				
+				if(currentPiece=="O")
+				{
+					fillCount++;
+				}
+	
+				//console.log(puzzleData[locInData]);
+				locInData++;
+				/*if(rng<=difficulty)
+				{
+					gameBoard[i][j]="O";
+					fillCount++;
+				}
+				else
+				{
+					gameBoard[i][j]="X";
+				}*/
+			}
+		}
+
+		setBoardVisibility();
+	}
+
+	function setBoardVisibility()
+	{
+		for(var i=0; i<10; i++)
+		{
+			for(var j=0; j<10; j++)
+			{
+				var name="r"+(i+1)+"c"+(j+1);//Used for the grid ID names
+				var rowcol="row"+(i+1)+"column"+(j+1);//Used for the grid ID names
+				var row="r"+(i+1);
+				var col="column"+(i+1);
+
+				//console.log(rowcol);
+
+				if(i<puzzleSize && j<puzzleSize)
+				{
+					document.getElementById(name).style.visibility="visible";
+					//document.getElementById(name).style.display="inline";
+
+					document.getElementById(rowcol).style.visibility="visible";
+					//document.getElementById(rowcol).style.display="inline";
+
+				}
+				else
+				{
+					document.getElementById(name).style.visibility="hidden";
+					//document.getElementById(name).style.display="none";
+
+					document.getElementById(rowcol).style.visibility="hidden";
+					//document.getElementById(rowcol).style.display="none";
+
+					document.getElementById(row).style.visibility="hidden";
+					document.getElementById(col).style.visibility="hidden";
+
+				}
+
+				if(i<puzzleSize)
+				{
+					document.getElementById(row).style.visibility="visible";
+					document.getElementById(col).style.visibility="visible";
+				}
+			}
+		}
+
+		clearHeaders();
+	}
+
+	function createPuzzleFromFile()
+	{
+		document.getElementById('my_file').click();
+		var fileData=document.getElementById('my_file');
+
+		const reader = new FileReader()
+		console.log(fileData);
+
+		reader.onload=fileData.textContent;
+		var textData=reader.onload;
+
+		console.log(textData);
+	}
+
+	function fillHeaders()
+	{
+		var reverseBoard=[puzzleSize];
+		fillBoard(reverseBoard);
+
+		for(var i=0; i<puzzleSize; i++)
+		{
+			for(var j=0; j<puzzleSize; j++)
+			{
+				reverseBoard[j][i]=gameBoard[i][j];
+			}
+		}
+
+		for(var i=0; i<puzzleSize; i++)
+		{
+			rowLabels[i]=checkData(gameBoard[i]);
+			columnLabels[i]=checkData(reverseBoard[i]);
+		}
+
+		updateRows();
+		updateColumns();
+	}
+
+	function checkData(check)
+	{
+		var currentString="";
+		var currentCount=0;
+		var zeroCheck=1;//Used in the event a row has no spots that should be filled
+
+		for(var i=0; i<check.length; i++)
+		{
+			if(i==check.length-1 && check[i]=="O")
+			{
+				zeroCheck=0;
+				currentCount++;
+				currentString+=currentCount;
+				currentCount=0;
+			}
+			else if(check[i]=="O")
+			{
+				zeroCheck=0;
+				currentCount++;
+			}
+			else
+			{
+				if(currentCount!=0)
+				{
+					zeroCheck=0;
+					currentString+=currentCount;
+					currentString+=" ";
+					currentCount=0;
+				}
+			}
+		}
+
+		if(zeroCheck==1)
+		{
+			currentString="0";
+		}
+
+		return currentString;
+	}
+
+	function clearHeaders()
+	{
+		for(var o=0; o<puzzleSize; o++)
+		{
+			document.getElementById("row"+(o+1)).innerHTML="";
+			document.getElementById("column"+(o+1)).innerHTML="";
+		}
+	}
+
+	function updateRows()
+	{
+		var globalRow="row"
+		var startingRow=0;
+
+		for(var o=0; o<puzzleSize; o++)
+		{
+			startingRow++;
+			var comb=globalRow+startingRow;
+			document.getElementById(comb).innerHTML=rowLabels[o];
+		}
+	}
+
+	function updateColumns()
+	{
+		var globalRow="column"
+		var startingColumn=0;
+
+		for(var o=0; o<puzzleSize; o++)
+		{
+			startingColumn++;
+			var comb=globalRow+startingColumn;
+			document.getElementById(comb).innerHTML=columnLabels[o];
+		}
+	}
+
+	function setValue(toBeUpdated, event)
+	{
+		var cheatButton=false;
+		var pos=toBeUpdated.split("c");
+		pos[0]=pos[0].replace("r"," ");
+
+		pos[0]-=1;
+		pos[1]-=1;
+
+		if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent))//Used for mobile
+		{
+			if(document.getElementById(toBeUpdated).value=="" && gameInProgress==1)
+			{
+				document.getElementById(toBeUpdated).value="O";
+				document.getElementById(toBeUpdated).style.background="black";
+			}
+			else if(document.getElementById(toBeUpdated).value=="O" && gameInProgress==1)
+			{
+				document.getElementById(toBeUpdated).value="X";
+				document.getElementById(toBeUpdated).style.background="white";
+			}
+			else if(document.getElementById(toBeUpdated).value=="X" && gameInProgress==1)
+			{
+				document.getElementById(toBeUpdated).value="";
+				document.getElementById(toBeUpdated).style.background="white";
+			}
+		}
+		else
+		{
+			if(event.button==0 && gameInProgress==1)
+			{
+				if(document.getElementById(toBeUpdated).value=="" && gameInProgress==1)
+				{
+					document.getElementById(toBeUpdated).value="O";
+					document.getElementById(toBeUpdated).style.background="black";
+				}
+				else
+				{
+					document.getElementById(toBeUpdated).value="";
+					document.getElementById(toBeUpdated).style.background="white";
+				}
+			}
+			else if(event.button==1 && gameInProgress==1 && cheatButton)
+			{
+				if(hintAmt>0)
+				{
+					if(gameBoard[pos[0]][pos[1]]=="O" && gameInProgress==1)
+					{
+						document.getElementById(toBeUpdated).value="O";
+						document.getElementById(toBeUpdated).style.background="black";
+					}
+					else
+					{
+						document.getElementById(toBeUpdated).value="X";
+						document.getElementById(toBeUpdated).style.background="white";
+					}
+					hintAmt--;
+					hintBtn.value=hintAmt+" hints left!";
+					document.getElementById("status").innerHTML=hintAmt+" hints left!";
+				}
+			}
+			else if(event.button==2 && gameInProgress==1)
+			{
+				if(document.getElementById(toBeUpdated).value=="" && gameInProgress==1)
+				{
+					document.getElementById(toBeUpdated).value="X";
+					document.getElementById(toBeUpdated).style.background="white";
+				}
+				else
+				{
+					document.getElementById(toBeUpdated).value="";
+					document.getElementById(toBeUpdated).style.background="white";
+				}
+			}
+		}
+
+
+		updateGameBoard();
+		checkForWin();
+	}
+
+	function giveHints(difficulty)
+	{
+		console.log("Difficulty hint: "+difficulty);
+		hintAmt=0;
+		hintBtn.disabled=false;
+
+		switch(difficulty)
+		{
+			case 10: hintAmt+=0.0;break;
+			case 9: hintAmt+=0.5;break;
+			case 8: hintAmt+=0.75;break;
+			case 7: hintAmt+=1.0;break;
+			case 6: hintAmt+=1.5;break;
+			case 5: hintAmt+=2.25;break;
+			case 4: hintAmt+=2.5;break;
+			case 3: hintAmt+=3.5;break;
+			case 2: hintAmt+=4.5;break;
+			case 1: hintAmt+=6.5;break;
+			default: hintAmt+=999;break;
+		}
+
+		switch(puzzleSize)
+		{
+			case 5: hintAmt+=1.25;break;
+			case 6: hintAmt+=2.25;break;
+			case 7: hintAmt+=2.5;break;
+			case 8: hintAmt+=2.75;break;
+			case 9: hintAmt+=3.0;break;
+			case 10: hintAmt+=3.5;break;
+			default: hintAmt+=999;break;
+		}
+
+		hintAmt=Math.floor(hintAmt);
+		hintBtn.value=hintAmt+" hints left!";
+	}
+
+	function startGame(difficulty)
+	{
+		//document.getElementById("codeStore").innerHTML=puzzleCode;
+		
+		document.getElementById("difficulty").innerHTML=difficulty;
+		document.getElementById("difficulty").value=difficulty;
+		console.log("HiddenDifficulty: "+document.getElementById("difficulty").innerHTML);
+		//setPuzzleSize();//Disabled due to Chrome update until it can be resolved
+
+		giveHints(difficulty);
+		fillBoard(gameBoard);
+
+		createRandomPuzzle();
+		fillHeaders();
+		document.getElementById("game").style.visibility="visible";
+		document.getElementById("status").innerHTML="Puzzle: " + puzzleName;
+		console.log(gameBoard);
+		fillBoard(playerBoard);
+		clearHTMLBoard();
+		gameInProgress=1;
+	}
+
+
+
+	hintBtn.onclick = function startGame()
+	{
+		if(gameInProgress==1 && hintAmt>0)
+		{
+			var rowPos=0;
+			var colPos=0;
+			var nameUpdate="";
+
+			do
+			{
+				rowPos=Math.floor(Math.random()*puzzleSize);
+				colPos=Math.floor(Math.random()*puzzleSize);
+				nameUpdate="r"+(rowPos+1)+"c"+(colPos+1);
+			}
+			while(document.getElementById(nameUpdate).value==gameBoard[rowPos][colPos]);
+
+			if(gameBoard[rowPos][colPos]=="O")
+			{
+				document.getElementById(nameUpdate).value="O";
+				document.getElementById(nameUpdate).style.background="black";
+			}
+			else//is X
+			{
+				document.getElementById(nameUpdate).value="X";
+				document.getElementById(nameUpdate).style.background="white";
+			}
+
+			hintAmt--;
+			hintBtn.value=hintAmt+" hints left!";
+
+			if(hintAmt==0)
+			{
+				hintBtn.disabled=true;
+				//Update code to grey out button and make unclickable
+			}
+
+			updateGameBoard();
+			checkForWin();
+		}
+	}
+
+	helpBtn.onclick = function displayInstructions()
+	{
+		console.log(puzzleSize);
+		alert("GOAL\nTo use the hints on the rows and columns to fill in the puzzle\n\nCONTROLS\nLeft click: Fill in spot\nRight click: Mark spot as incorrect\nHint: Correctly fills in one correct spot, limited use");
+	}
+
+	startGame(Math.floor(Math.random()*10)+1);
+	</script>
+</body>
+</html>

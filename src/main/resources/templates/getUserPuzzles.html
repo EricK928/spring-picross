@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Login Successful</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p hidden align='center' id="codes" th:text="${userData.getPuzzleCodes()}"></p>
+<p hidden align='center' id="names" th:text="${userData.getPuzzleName()}"></p>
+<p hidden align='center' id="plays" th:text="${userData.getTimesCompleted()}"></p>
+
+<a href="/loginSuccessAdmin">Go back</a>
+<br>
+</body>
+
+<script>
+var pCode=document.getElementById("codes").innerHTML;
+var pName=document.getElementById("names").innerHTML;
+var pPlay=document.getElementById("plays").innerHTML;
+
+var puzzleCodes=pCode.split(";");
+var puzzleNames=pName.split(";");
+var puzzlePlays=pPlay.split(";");
+
+console.log(puzzleCodes);
+console.log(puzzleNames);
+console.log(puzzlePlays);
+
+function tableCreate()
+{
+  var body = document.getElementsByTagName("body")[0];
+
+  var tbl = document.createElement("table");
+  tbl.id=("game");
+  tbl.style.width  = "100px";
+  tbl.align = 'center';
+
+  var tblBody = document.createElement("tbody");
+
+  var rowa = document.createElement("tr");
+
+  var headerValues=["Puzzle Code", "Puzzle Name", "Times Completed"];
+  
+  for(var k=0; k<3; k++)
+  {
+	var header = document.createElement("th");
+	header.scope="col";
+	header.id="column"+k;
+	header.innerHTML=headerValues[k];
+    rowa.appendChild(header);
+  }
+
+  tblBody.appendChild(rowa);
+
+  for (var j = 0; j < puzzleCodes.length; j++) 
+  {
+    var row = document.createElement("tr");
+    row.id="r"+j;
+
+    for (var i = 0; i < 3; i++) 
+    {
+      var cell = document.createElement("td");
+      cell.id="row"+j+"column"+i;
+      
+      if(i==0)
+    	  {
+    	  	cell.innerHTML=puzzleCodes[j];
+    	  }
+      else if(i==1)
+    	  {
+    	  cell.innerHTML=puzzleNames[j];
+    	  }
+      else
+    	  {
+    	  cell.innerHTML=puzzlePlays[j];
+    	  }
+
+      row.appendChild(cell);
+    }
+
+    tblBody.appendChild(row);
+  }
+	tbl.appendChild(tblBody);
+	  // put <table> in the <body>
+	body.appendChild(tbl);
+	  // tbl border attribute to
+	tbl.setAttribute("border", "2");
+
+	console.log(tbl);
+}
+
+tableCreate();
+</script>
+</html>

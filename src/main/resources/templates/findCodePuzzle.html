@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Puzzle Game Login</title>
+</head>
+<body>
+<h1>Picross Code</h1>
+<form action="#" th:action="@{/findCodePuzzle}" th:object="${findCodePuzzle}" method="post">
+        <p>Puzzle Code: <input type="text" th:field="*{puzzleName}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</body>
+</html>

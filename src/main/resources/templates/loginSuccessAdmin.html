@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Login Successful</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p hidden align='center' id="isAdmin" th:text="${login.getAdmin()}"></p>
+	<h1><p th:text="'Welcome ' + ${login.getName()}" /></h1>
+	<h2><p hidden id="adminText">Admin View</p></h2>
+	<h1><p th:text="'User ID: ' + ${login.getId()}" /></h1>
+	<h1><p th:text="'Exp: ' + ${login.getUserExp()}" /></h1>
+	<a href="/picrossRandom">Play the game! (Random)</a>
+	<br>
+	<a href="/findCodePuzzle">Play the game! (Code)</a>
+	<br>
+	<a href="/createPuzzle">Create a puzzle</a>
+	<br>
+		<a href="/getUserPuzzles">View my puzzles</a>
+	<br>
+	<a href="/changeEmail">Change E-Mail</a>
+	<br>
+	<a href="/changePassword">Change Password</a>
+	<br>
+	<p hidden id="giveBan"><a href="/giveBan">Ban Account</a></p>
+	<p hidden id="giveAdmin"><a href="/giveAdmin">Make Account Admin</a></p>
+    <a href="/login">Log out</a>
+</body>
+
+<script>
+var isAdmin=document.getElementById("isAdmin").innerHTML;
+console.log("Admin status: "+isAdmin);
+
+if(isAdmin=="true")
+{
+	document.getElementById("adminText").hidden=false;
+	document.getElementById("giveBan").hidden=false;
+	document.getElementById("giveAdmin").hidden=false;
+}
+</script>
+</html>
