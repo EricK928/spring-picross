@@ -246,14 +246,14 @@
 	function fillHeaders()
 	{
 		var reverseBoard=[puzzleWidth];
-		
+
 		for(var j=0; j<puzzleWidth; j++)
 		{
 			reverseBoard[j]=new Array(puzzleHeight);
 		}
-		
+
 		console.log(reverseBoard);
-		
+
 		for(var i=0; i<puzzleHeight; i++)
 		{
 			for(var j=0; j<puzzleWidth; j++)
@@ -266,7 +266,7 @@
 		{
 			rowLabels[i]=checkData(gameBoard[i]);
 		}
-		
+
 		for(var i=0; i<puzzleWidth; i++)
 		{
 			columnLabels[i]=checkData(reverseBoard[i]);
@@ -345,7 +345,7 @@
 
 	function setValue(toBeUpdated)
 	{
-		var newToBeUpdated = toBeUpdated.path[0].id;
+		var newToBeUpdated = toBeUpdated.target.id;
 		//console.log(document.getElementById(newToBeUpdated));
 
 		var cheatButton=false;
@@ -474,7 +474,7 @@
 		fillBoard(gameBoard);
 
 		createRandomPuzzle();
-		
+
 		console.log(gameBoard);
 
 		fillHeaders();
